@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# 🚗 Vehicle VIN Decoder & Encyclopedia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **Single Page Application (SPA)** built with **React** and **TypeScript**. This tool allows users to decode Vehicle Identification Numbers (VIN) and explore a comprehensive database of technical vehicle variables using the **NHTSA vPIC API**.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[View Live Project on Vercel](https://vin-decoder-pi.vercel.app/)
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **VIN Decoding:** Instant decoding of 17-character VINs with detailed technical results.
+- **Search History:** Smart tracking of the last 3 decoded VINs for quick reference.
+- **Variable Encyclopedia:** A dedicated section to browse and search through all possible vehicle variables.
+- **Deep Linking:** Dynamic routing for individual variable details, allowing for easy sharing and bookmarking.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** — Functional components and modern Hooks (`useState`, `useEffect`, `useParams`).
+- **TypeScript** — For type safety, interfaces, and better developer experience.
+- **React Router v6** — Handling navigation and dynamic parameters.
+- **CSS3** — Custom styling with a focus on usability and clean UI.
+- **NHTSA API** — Integration with official government vehicle data.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Installation & Setup
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/MarinaKramarchuk/vin-decoder](https://github.com/MarinaKramarchuk/vin-decoder)
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📝 Technical Implementation Details
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **State Management:** Built using React's built-in hooks, avoiding unnecessary external libraries for a lightweight footprint.
+- **Data Fetching:** Implemented robust error handling and loading states for a seamless user experience.
+- **Security:** Used `dangerouslySetInnerHTML` carefully to render sanitized HTML descriptions provided by the NHTSA API.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+_Created with ♥ by Marina_
