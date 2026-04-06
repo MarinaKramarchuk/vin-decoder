@@ -3,6 +3,7 @@ import { getVehicleVariableList } from "../../services/vindecoder";
 import type { VehicleVariable } from "../../types/getvehiclevariablelist";
 import Loader from "../../components/Loader/Loader";
 import VariableItem from "../../components/VariableItem/VariableItem";
+import { useAutoErrorClose } from "../../hooks/useAutoErrorClose";
 
 const preparedvariables = (
   vars: VehicleVariable[],
@@ -38,6 +39,9 @@ export const VariablesPage = () => {
 
     fetchVariables();
   }, []);
+
+  useAutoErrorClose(error, setError);
+  
   return (
     <div>
       <h1>Vehicle Variables</h1>

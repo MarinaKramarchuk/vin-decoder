@@ -21,7 +21,7 @@
   }
 
   &__button {
-    padding: $padding-size / 2 $padding-size;
+    padding: calc($padding-size / 2) $padding-size;
     border: 1px solid $border-color;
     border-radius: $border-radius;
     background-color: white;

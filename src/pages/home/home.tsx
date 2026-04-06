@@ -5,6 +5,7 @@ import type { DecodeVinResponse } from "../../types/decodevin";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import VinSearchFormt from "../../components/VinSearchForm/VinSearchForm";
+import { useAutoErrorClose } from "../../hooks/useAutoErrorClose";
 
 export const HomePage = () => {
   const [selectedVin, setSelectedVin] = useState("");
@@ -43,6 +44,8 @@ export const HomePage = () => {
       setIsLoading(false);
     }
   };
+
+  useAutoErrorClose(error, setError);
 
   return (
     <section>

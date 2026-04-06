@@ -4,6 +4,7 @@ import { getVehicleVariableList } from "../../services/vindecoder";
 import type { VehicleVariable } from "../../types/getvehiclevariablelist";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import { useAutoErrorClose } from "../../hooks/useAutoErrorClose";
 
 export const VariableDetailsPage = () => {
   const { variableId } = useParams<{ variableId: string }>();
@@ -29,6 +30,8 @@ export const VariableDetailsPage = () => {
 
     fetchVariables();
   }, [variableId]);
+
+  useAutoErrorClose(error, setError);
 
   const variable = variables.find((v) => v.ID === id);
   return (
