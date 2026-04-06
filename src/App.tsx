@@ -1,8 +1,8 @@
 import "./App.scss";
 import { Routes, Route, Link } from "react-router-dom";
-import { HomePage } from "./pages/home/Home";
-import { VariablesPage } from "./pages/variables/Variables";
-import { VariableDetailsPage } from "./pages/details";
+import { HomePage } from "./pages/home_temp/Home";
+import { VariablesPage } from "./pages/variables_temp/Variables";
+import { VariableDetailsPage } from "./pages/details_temp";
 
 function App() {
   return (
