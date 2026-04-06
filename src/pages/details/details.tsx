@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import "./Details.scss";
 import { getVehicleVariableList } from "../../services/vindecoder";
 import type { VehicleVariable } from "../../types/getvehiclevariablelist";
 import { Link, useParams } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 export const VariableDetailsPage = () => {
   const { variableId } = useParams<{ variableId: string }>();
@@ -31,36 +33,39 @@ export const VariableDetailsPage = () => {
   const variable = variables.find((v) => v.ID === id);
   return (
     <div>
-      <Link to="/variables">← Back to all variables</Link>
-
       <h1>Vehicle Variable Details</h1>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       {isLoading ? (
-        <p>Downloading for vehicle data...</p>
+        <Loader />
       ) : (
-        <div className="details-container">
+        <div className="details">
           {variable ? (
             <div key={variable.ID}>
-              <h2>{variable.Name}</h2>
+              <h2 className="details__name">{variable.Name}</h2>
 
               <div
-                className="variable-description"
+                className="details__description"
                 dangerouslySetInnerHTML={{ __html: variable.Description }}
               />
 
               {variable.GroupName && (
-                <p>
+                <p className="details__group">
                   <strong>Group:</strong> {variable.GroupName}
                 </p>
               )}
             </div>
           ) : (
-            !isLoading && <p>Variable with ID {id} not found.</p>
+            !isLoading && (
+              <p className="no-data">Variable with ID {id} not found.</p>
+            )
           )}
         </div>
       )}
+      <Link className="back-link" to="/variables">
+        ← Back to all variables
+      </Link>
     </div>
   );
 };

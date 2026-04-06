@@ -1,0 +1,99 @@
+@use "./_variables" as *;
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 420px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 48px;
+  margin: $margin-size 0;
+
+  @media (max-width: 600px) {
+    font-size: 32px;
+  }
+}
+
+input {
+  margin: $margin-size auto;
+  max-width: 500px;
+  padding: $padding-size;
+  border-radius: $border-radius;
+}
+
+.error {
+  max-width: 300px;
+  margin: $margin-size auto;
+  padding: $gap-size;
+  border: 1px solid red;
+  border-radius: 10px;
+  color: red;
+  font-weight: bold;
+  margin-top: $margin-size;
+}
+
+.no-data {
+  margin: $margin-size auto;
+  padding: $gap-size;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  color: $text-color;
+  font-weight: bold;
+  max-width: 300px;
+}

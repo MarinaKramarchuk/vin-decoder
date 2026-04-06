@@ -1,0 +1,48 @@
+@use "../../_variables" as *;
+
+.details {
+  margin: $margin-size $margin-size $margin-size * 3 $margin-size;
+  padding: $padding-size;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-size;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  &__name {
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: $h3-color;
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+
+  &__description {
+    font-style: italic;
+    color: $text-color;
+  }
+
+  &__group {
+    font-size: 18px;
+    color: $accent-color;
+  }
+}
+
+.back-link {
+  padding: $gap-size;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  color: $text-color;
+  font-weight: bold;
+  max-width: 300px;
+  text-align: center;
+
+  &:hover {
+    background-color: $accent-color;
+    color: white;
+    border-color: $accent-color;
+  }
+}

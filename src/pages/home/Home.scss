@@ -1,0 +1,65 @@
+@use "../../_variables" as *;
+.history {
+  margin-bottom: $margin-size;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-size;
+
+  &__text {
+    color: $accent-color;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  &__block {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    gap: $gap-size;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__button {
+    padding: $padding-size / 2 $padding-size;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background-color: white;
+    color: $text-color;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+
+    &:hover {
+      background-color: $accent-color;
+      color: white;
+      border-color: $accent-color;
+    }
+  }
+}
+
+.vin-result {
+  margin: $margin-size;
+  padding: $padding-size;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-size;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  &__header {
+    margin-bottom: $gap-size;
+  }
+
+  &__item {
+    font-style: italic;
+    color: $text-color;
+  }
+  &__link {
+    color: $h3-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

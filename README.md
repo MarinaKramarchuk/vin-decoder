@@ -19,7 +19,7 @@ A modern **Single Page Application (SPA)** built with **React** and **TypeScript
 - **React 18** — Functional components and modern Hooks (`useState`, `useEffect`, `useParams`).
 - **TypeScript** — For type safety, interfaces, and better developer experience.
 - **React Router v6** — Handling navigation and dynamic parameters.
-- **CSS3** — Custom styling with a focus on usability and clean UI.
+- **SASS** — Advanced styling with a focus on responsive design (420px–1440px), clean UI, and optimized CSS delivery.
 - **NHTSA API** — Integration with official government vehicle data.
 
 ## 🚀 Installation & Setup

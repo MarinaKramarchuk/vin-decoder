@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getVehicleVariableList } from "../../services/vindecoder";
 import type { VehicleVariable } from "../../types/getvehiclevariablelist";
-import { Link } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import VariableItem from "../../components/VariableItem/VariableItem";
 
 const preparedvariables = (
   vars: VehicleVariable[],
@@ -40,7 +41,7 @@ export const VariablesPage = () => {
   return (
     <div>
       <h1>Vehicle Variables</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       <input
         type="text"
@@ -50,25 +51,11 @@ export const VariablesPage = () => {
       />
 
       {isLoading ? (
-        <p>Downloading for vehicle data...</p>
+        <Loader />
       ) : (
         <ul>
           {filteredVariables.map((variable) => (
-            <li key={variable.ID}>
-              <Link to={`/variables/${variable.ID}`}>
-                <h3>{variable.Name}</h3>
-              </Link>
-
-              <div
-                className="variable-description"
-                dangerouslySetInnerHTML={{ __html: variable.Description }}
-              />
-              {variable.GroupName && (
-                <p>
-                  <strong>Group:</strong> {variable.GroupName}
-                </p>
-              )}
-            </li>
+            <VariableItem key={variable.ID} variable={variable} />
           ))}
         </ul>
       )}

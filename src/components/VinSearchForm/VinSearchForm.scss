@@ -1,0 +1,11 @@
+@use "../../_variables" as *;
+.input {
+  &__button {
+    margin-left: $gap-size;
+    padding: $padding-size;
+    background-color: $accent-color;
+    color: white;
+    border-radius: $border-radius;
+    border: 1px solid black;
+  }
+}

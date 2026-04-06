@@ -1,52 +1,27 @@
 import { useState } from "react";
+import "./Home.scss";
 import { getCharacteristics } from "../../services/vindecoder";
 import type { DecodeVinResponse } from "../../types/decodevin";
 import { Link } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import VinSearchFormt from "../../components/VinSearchForm/VinSearchForm";
 
 export const HomePage = () => {
+  const [selectedVin, setSelectedVin] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
   const [characteristics, setCharacteristics] =
     useState<DecodeVinResponse | null>(null);
+
   const [history, setHistory] = useState<string[]>(() => {
     const saved = localStorage.getItem("vin_history");
     return saved ? JSON.parse(saved) : [];
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    if (/[а-яА-ЯёЁіІїЇєЄґҐ]/.test(value)) {
-      setError(
-        "Please enter only Latin letters and numbers. Cyrillic characters are not allowed.",
-      );
-      return;
-    }
-
-    if (/[^a-zA-Z0-9]/.test(value)) {
-      setError(
-        "Invalid character. Only Latin letters and numbers are allowed.",
-      );
-      return;
-    }
-
-    if (/[IOQioq]/.test(value)) {
-      setError("Letters I, O, and Q are not used in VIN codes.");
-    } else {
-      setError(null);
-    }
-
-    const cleanValue = value.toUpperCase();
-    if (cleanValue.length <= 17) {
-      setQuery(cleanValue);
-    }
-  };
-
   const updateHistory = (newVin: string) => {
     setHistory((prev) => {
       const filtered = prev.filter((v) => v !== newVin);
-      const updated = [newVin, ...filtered].slice(0, 3); // Залишаємо тільки перші 3
+      const updated = [newVin, ...filtered].slice(0, 3);
 
       localStorage.setItem("vin_history", JSON.stringify(updated));
 
@@ -69,43 +44,28 @@ export const HomePage = () => {
     }
   };
 
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (query.length !== 17) {
-      setError("VIN must be exactly 17 characters long.");
-      return;
-    }
-    fetchCharacteristics(query);
-  };
-
   return (
-    <div>
+    <section>
       <h1>VIN Decoder</h1>
-      <form onSubmit={handleOnSubmit}>
-        <input
-          type="text"
-          placeholder="Enter VIN"
-          maxLength={17}
-          value={query}
-          onChange={handleInputChange}
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Decoding..." : "Decode VIN"}
-        </button>
-      </form>
+      <VinSearchFormt
+        onSearch={fetchCharacteristics}
+        isLoading={isLoading}
+        initialValue={selectedVin}
+      />
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       {history.length > 0 && (
-        <div>
-          <p>Last searched:</p>
-          <div>
+        <div className="history">
+          <p className="history__text">Last searched:</p>
+          <div className="history__block">
             {history.map((vin) => (
               <button
+                className="history__button"
                 type="button"
                 key={vin}
                 onClick={() => {
-                  setQuery(vin);
+                  setSelectedVin(vin);
                   fetchCharacteristics(vin);
                 }}
               >
@@ -117,21 +77,21 @@ export const HomePage = () => {
       )}
 
       {characteristics?.Results?.length === 0 && !isLoading && (
-        <p>No data found for this VIN.</p>
+        <p className="no-data">No data found for this VIN.</p>
       )}
 
       {isLoading ? (
-        <p>Searching for vehicle data...</p>
+        <Loader />
       ) : (
         characteristics?.Results && (
-          <div>
-            <h2>Full Results:</h2>
+          <div className="vin-result">
+            <h2 className="vin-result__header">Full Results:</h2>
             <ul>
               {characteristics.Results.filter(
                 (result) => result.Value && result.Value.trim() !== "",
               ).map((result, index) => (
-                <li key={`${result.VariableId}-${index}`}>
-                  <Link to={`/variables/${result.VariableId}`}>
+                <li className="vin-result__item" key={`${result.VariableId}-${index}`}>
+                  <Link className="vin-result__link" to={`/variables/${result.VariableId}`}>
                     <strong>{result.Variable}:</strong>
                   </Link>{" "}
                   {result.Value}
@@ -141,7 +101,7 @@ export const HomePage = () => {
           </div>
         )
       )}
-    </div>
+    </section>
   );
 };
 

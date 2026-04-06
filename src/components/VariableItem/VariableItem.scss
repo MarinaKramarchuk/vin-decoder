@@ -1,0 +1,34 @@
+@use "../../_variables" as *;
+
+.variable {
+  margin: $margin-size;
+  padding: $padding-size;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-size;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  &__name {
+    font-size: 28px;
+    font-weight: bold;
+    color: $h3-color;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width:600px) {
+      font-size: 24px;
+    }
+  }
+
+  &__description {
+    font-style: italic;
+    color: $text-color;
+  }
+
+  &__group {
+    font-size: 18px;
+    color: $accent-color;
+  }
+}
